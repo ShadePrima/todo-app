@@ -1,10 +1,12 @@
 import React from 'react';
-import './App.css';
+import './styles/App.css';
+import AddTask from './components/AddTask/AddTask';
 
 function App() {
   return (
     <div className='App'>
-      <p>Hello</p>
+      <h1>To Do List</h1>
+      <AddTask />
     </div>
   );
 }
