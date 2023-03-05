@@ -1,9 +1,12 @@
 import React from 'react';
 import styles from './AddTask.module.scss';
 
-const AddTask: React.FC = () => {
+type AddTaskProps = {
+  onAddTask: (text: string) => void;
+};
+
+const AddTask: React.FC<AddTaskProps> = ({ onAddTask }) => {
   const [text, setText] = React.useState('');
-  console.log(text);
 
   return (
     <div className={styles.root}>
@@ -15,6 +18,7 @@ const AddTask: React.FC = () => {
       <button
         onClick={() => {
           setText('');
+          onAddTask(text);
         }}
       >
         Add
