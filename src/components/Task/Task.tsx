@@ -1,5 +1,7 @@
 import React from 'react';
 
+import styles from './Task.module.scss';
+
 type TaskProps = {
   task: {
     id: number;
@@ -17,6 +19,7 @@ const Task: React.FC<TaskProps> = ({ task, onChange, onDelete }) => {
     taskContent = (
       <>
         <input
+          className={styles.editInput}
           value={task.text}
           onChange={(e) => {
             onChange({
@@ -25,22 +28,27 @@ const Task: React.FC<TaskProps> = ({ task, onChange, onDelete }) => {
             });
           }}
         />
-        <button onClick={() => setIsEditing(false)}>Save</button>
+        <button className={styles.button} onClick={() => setIsEditing(false)}>
+          Save
+        </button>
       </>
     );
   } else {
     taskContent = (
       <>
         {task.text}
-        <button onClick={() => setIsEditing(true)}>Edit</button>
+        <button className={styles.button} onClick={() => setIsEditing(true)}>
+          Edit
+        </button>
       </>
     );
   }
 
   return (
-    <div>
-      <label>
+    <div className={styles.root}>
+      <label className={styles.label}>
         <input
+          className={styles.checkbox}
           type='checkbox'
           checked={task.done}
           onChange={(e) => {
@@ -50,8 +58,12 @@ const Task: React.FC<TaskProps> = ({ task, onChange, onDelete }) => {
             });
           }}
         />
-        {taskContent}
-        <button onClick={() => onDelete(task.id)}>Delete</button>
+        <div className={styles.taskContent}>{taskContent}</div>
+        <div className={styles.btnDelete}>
+          <button className={styles.button} onClick={() => onDelete(task.id)}>
+            Delete
+          </button>
+        </div>
       </label>
     </div>
   );

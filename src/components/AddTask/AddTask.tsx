@@ -11,11 +11,13 @@ const AddTask: React.FC<AddTaskProps> = ({ onAddTask }) => {
   return (
     <div className={styles.root}>
       <input
+        className={styles.input}
         placeholder='Add task'
         value={text}
         onChange={(event) => setText(event.target.value)}
       />
       <button
+        className={styles.button}
         onClick={() => {
           setText('');
           onAddTask(text);

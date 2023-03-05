@@ -40,7 +40,7 @@ function App() {
   };
 
   return (
-    <div className='App'>
+    <div className='container'>
       <h1>To Do List</h1>
       <AddTask onAddTask={handleAddTask} />
       <TaskList
@@ -52,7 +52,7 @@ function App() {
   );
 }
 
-let nextId = 1;
+let nextId = 3;
 
 const initialTask = [
   { id: 0, text: 'Firs task', done: true },
