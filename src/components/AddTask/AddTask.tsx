@@ -16,15 +16,28 @@ const AddTask: React.FC<AddTaskProps> = ({ onAddTask }) => {
         value={text}
         onChange={(event) => setText(event.target.value)}
       />
-      <button
-        className={styles.button}
-        onClick={() => {
-          setText('');
-          onAddTask(text);
-        }}
-      >
-        Add
-      </button>
+      {text ? (
+        <button
+          className={styles.button}
+          onClick={() => {
+            setText('');
+            onAddTask(text);
+          }}
+        >
+          Add
+        </button>
+      ) : (
+        <button
+          disabled
+          className={styles.button}
+          onClick={() => {
+            setText('');
+            onAddTask(text);
+          }}
+        >
+          Add
+        </button>
+      )}
     </div>
   );
 };

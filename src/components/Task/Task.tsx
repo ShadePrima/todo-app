@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import styles from './Task.module.scss';
 
@@ -28,6 +29,7 @@ const Task: React.FC<TaskProps> = ({ task, onChange, onDelete }) => {
             });
           }}
         />
+
         <button className={styles.button} onClick={() => setIsEditing(false)}>
           Save
         </button>
@@ -36,7 +38,8 @@ const Task: React.FC<TaskProps> = ({ task, onChange, onDelete }) => {
   } else {
     taskContent = (
       <>
-        {task.text}
+        <Link to={`/${task.id}`}>{task.text}</Link>
+
         <button className={styles.button} onClick={() => setIsEditing(true)}>
           Edit
         </button>

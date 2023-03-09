@@ -1,13 +1,18 @@
 import React from 'react';
-import './styles/App.css';
-import AddTask from './components/AddTask/AddTask';
+import { Route, Routes } from 'react-router-dom';
+
 import TaskList from './components/TaskList/TaskList';
+import TaskItem from './components/TaskItem/TaskItem';
+import { initialTask } from './utils/initialTask';
+
+import './styles/App.css';
 
 function App() {
   const [tasks, setTasks] = React.useState<
     {
       id: number;
       text: string;
+      description: string;
       done: boolean;
     }[]
   >(initialTask);
@@ -18,6 +23,7 @@ function App() {
       {
         id: nextId++,
         text: text,
+        description: '',
         done: false,
       },
     ]);
@@ -39,25 +45,47 @@ function App() {
     setTasks(tasks.filter((t) => t.id !== taskId));
   };
 
+  const handleChangeDescription = (description: string) => {
+    setTasks([
+      ...tasks,
+      {
+        id: nextId++,
+        text: '',
+        description: description,
+        done: false,
+      },
+    ]);
+  };
+
   return (
     <div className='container'>
       <h1>To Do List</h1>
-      <AddTask onAddTask={handleAddTask} />
-      <TaskList
-        tasks={tasks}
-        onChangeTask={handleChangeTask}
-        onDeleteTask={handleDeleteTask}
-      />
+      <Routes>
+        <Route
+          path='/'
+          element={
+            <TaskList
+              tasks={tasks}
+              onAddTask={handleAddTask}
+              onChangeTask={handleChangeTask}
+              onDeleteTask={handleDeleteTask}
+            />
+          }
+        />
+        <Route
+          path='/:id'
+          element={
+            <TaskItem
+              onChangeDescription={handleChangeDescription}
+              tasks={tasks}
+            />
+          }
+        />
+      </Routes>
     </div>
   );
 }
 
 let nextId = 3;
-
-const initialTask = [
-  { id: 0, text: 'Firs task', done: true },
-  { id: 1, text: 'Second task', done: false },
-  { id: 2, text: 'Third task', done: false },
-];
 
 export default App;
